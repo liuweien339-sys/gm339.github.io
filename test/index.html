@@ -2,9 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Magisk模块仓库</title>
+    <title>搜索</title>
     <style>
-        /* 搜索按钮样式 */
         .search-bar {
             position: sticky;
             top: 0;
@@ -13,71 +12,76 @@
             border-bottom: 1px solid #ddd;
             margin-bottom: 20px;
             z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
+        .search-input-group {
+            max-width: 400px;
+            margin: 0 auto;
         }
-        .search-btn {
-            padding: 8px 16px;
-            background: #1976D2;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
             transition: 0.2s;
+            box-sizing: border-box;
         }
-        .search-btn:hover {
-            background: #0b5ea7;
+        .search-input:focus {
+            border-color: #1976D2;
         }
-        .reset-btn {
-            background: #6c757d;
-        }
-        .reset-btn:hover {
-            background: #5a6268;
+        .status-msg {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
         }
         .highlight {
             background-color: yellow;
             font-weight: bold;
         }
-        .no-results {
+        .current-keyword {
             text-align: center;
-            padding: 40px;
-            color: red;
-            font-size: 18px;
+            margin-top: 10px;
+            padding: 8px;
+            background: #e3f2fd;
+            border-radius: 20px;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .reset-hint {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #999;
         }
     </style>
 </head>
 <body>
 
-<!-- 搜索按钮栏 -->
+<!-- 搜索栏 - 只有输入框 -->
 <div class="search-bar">
-    <div class="btn-group">
-        <button class="search-btn" onclick="searchModule('Shamiko')">Shamiko</button>
-        <button class="search-btn" onclick="searchModule('PlayIntegrityFork')">PlayIntegrityFork</button>
-        <button class="search-btn" onclick="searchModule('Play Integrity Fix')">Play Integrity Fix</button>
-        <button class="search-btn" onclick="searchModule('TrickyStore')">TrickyStore</button>
-        <button class="search-btn" onclick="searchModule('TrickyAddonModule')">TrickyAddonModule</button>
-        <button class="search-btn" onclick="searchModule('TS Enhancer')">TS Enhancer</button>
-        <button class="search-btn" onclick="searchModule('TEESimulator')">TEESimulator</button>
-        <button class="search-btn" onclick="searchModule('Zygisk Next')">Zygisk Next</button>
-        <button class="search-btn" onclick="searchModule('LSPosed')">LSPosed</button>
-        <button class="search-btn" onclick="searchModule('susfs4ksu')">susfs4ksu</button>
-        <button class="search-btn reset-btn" onclick="resetAll()">📋 显示全部</button>
+    <div class="search-input-group">
+        <input type="text" id="searchInput" class="search-input" placeholder="输入模块名称搜索...">
     </div>
+    <div class="status-msg" id="statusMsg">
+        💡 提示：输入关键词后自动搜索，按 ESC 键清空并重置
+    </div>
+    <div id="currentKeywordDisplay" style="text-align: center;"></div>
+    <div class="reset-hint" id="resetHint"></div>
 </div>
 
-<!-- 你的原始模块内容 -->
+<!-- 你的模块内容 -->
 <section class="download-section">
     <p>Shamiko</p>
     <p>隐藏环境模块</p>
     <p>最新版本1.2.5</p>
     <p>最后更新时间 2025年6月18日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/LSPosed/LSPosed.github.io/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/LSPosed/LSPosed.github.io/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -87,7 +91,7 @@
     <p>最新版本V16</p>
     <p>最后更新时间 2026年1月9日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/osm0sis/PlayIntegrityFork/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/osm0sis/PlayIntegrityFork/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -97,7 +101,7 @@
     <p>最新版本V3.0</p>
     <p>最后更新时间 2025年8月9日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/EricInacio01/PlayIntegrityFix-NEXT/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/EricInacio01/PlayIntegrityFix-NEXT/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -107,7 +111,7 @@
     <p>最新版本V4.5</p>
     <p>最后更新时间 2026年3月28日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/KOWX712/PlayIntegrityFix/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/KOWX712/PlayIntegrityFix/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -117,7 +121,7 @@
     <p>最新版本1.4.1</p>
     <p>最后更新时间 2025年11月2日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/5ec1cff/TrickyStore/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/5ec1cff/TrickyStore/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -127,7 +131,7 @@
     <p>最新版本v5.0-beta.1</p>
     <p>最后更新时间 2026年4月3日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/KOWX712/Tricky-Addon-Update-Target-List/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/KOWX712/Tricky-Addon-Update-Target-List/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -137,7 +141,7 @@
     <p>最新版本v1.0.0</p>
     <p>最后更新时间 2026年2月14日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/XtrLumen/TS-Enhancer-Extreme/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/XtrLumen/TS-Enhancer-Extreme/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -147,7 +151,7 @@
     <p>最新版本v3.2</p>
     <p>最后更新时间 2026年3月7日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/JingMatrix/TEESimulator/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/JingMatrix/TEESimulator/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -157,7 +161,7 @@
     <p>最新版本v6.0.0-162</p>
     <p>最后更新时间 2026年4月1日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/Enginex0/TEESimulator-RS/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/Enginex0/TEESimulator-RS/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -167,7 +171,7 @@
     <p>最新版本1.3.4</p>
     <p>最后更新时间 2026年4月8日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/Dr-TSNG/ZygiskNext/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/Dr-TSNG/ZygiskNext/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -177,7 +181,7 @@
     <p>最新版本2.0</p>
     <p>最后更新时间 2026年3月22日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/JingMatrix/LSPosed/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/JingMatrix/LSPosed/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -187,7 +191,7 @@
     <p>最新版本1.9.2</p>
     <p>最后更新时间 2023年10月11日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/LSPosed/LSPosed/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/LSPosed/LSPosed/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
@@ -197,20 +201,19 @@
     <p>最新版本v1.5.2+ Revision 27</p>
     <p>最后更新时间 2026年3月28日</p>
     <div style="margin-top: 20px;">
-        <a href="https://github.com/sidex15/susfs4ksu-module/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">📥跳转下载页面</a>
+        <a href="https://github.com/sidex15/susfs4ksu-module/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
     </div>
 </section>
 
 <script>
-// 获取所有模块（每个 .download-section 就是一个模块）
+// 获取所有模块
 function getAllModules() {
     return document.querySelectorAll('.download-section');
 }
 
-// 保存每个模块的原始HTML内容
+// 保存原始内容
 let originalContents = [];
 
-// 页面加载时保存原始内容
 window.onload = function() {
     const modules = getAllModules();
     modules.forEach((module, index) => {
@@ -218,28 +221,34 @@ window.onload = function() {
     });
 };
 
-// 搜索模块（匹配第一个 <p> 标签里的模块名）
-function searchModule(keyword) {
+// 执行搜索
+function performSearch(keyword) {
+    if (!keyword || keyword.trim() === '') {
+        resetAll();
+        return;
+    }
+    
+    keyword = keyword.trim();
     const modules = getAllModules();
     let hasResults = false;
     
+    // 显示当前搜索的关键词
+    const displayDiv = document.getElementById('currentKeywordDisplay');
+    displayDiv.innerHTML = `<div class="current-keyword">🔍 当前搜索: <strong>${keyword}</strong></div>`;
+    
     modules.forEach(module => {
-        // 获取模块名称（第一个 <p> 标签）
         const nameP = module.querySelector('p:first-child');
         const moduleName = nameP ? nameP.innerText : '';
-        
-        // 检查是否匹配（不区分大小写）
         const isMatch = moduleName.toLowerCase().includes(keyword.toLowerCase());
         
         if (isMatch) {
             module.style.display = 'block';
             hasResults = true;
             
-            // 高亮显示匹配的模块名称
             if (nameP) {
                 const originalName = moduleName;
                 const highlightedName = originalName.replace(
-                    new RegExp(`(${keyword})`, 'gi'), 
+                    new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'), 
                     '<span class="highlight">$1</span>'
                 );
                 nameP.innerHTML = highlightedName;
@@ -249,25 +258,19 @@ function searchModule(keyword) {
         }
     });
     
-    // 显示无结果提示
-    let noResultMsg = document.getElementById('noResultMsg');
+    // 显示结果统计
+    const statusMsg = document.getElementById('statusMsg');
     if (!hasResults) {
-        if (!noResultMsg) {
-            noResultMsg = document.createElement('div');
-            noResultMsg.id = 'noResultMsg';
-            noResultMsg.className = 'no-results';
-            // 插入到所有模块之后
-            const container = document.body;
-            container.appendChild(noResultMsg);
-        }
-        noResultMsg.innerHTML = `❌ 没有找到包含 "${keyword}" 的Magisk模块。`;
-        noResultMsg.style.display = 'block';
-    } else if (noResultMsg) {
-        noResultMsg.style.display = 'none';
+        statusMsg.innerHTML = `❌ 没有找到包含 "${keyword}" 的Magisk模块`;
+        statusMsg.style.color = 'red';
+    } else {
+        const count = document.querySelectorAll('.download-section[style*="display: block"]').length;
+        statusMsg.innerHTML = `✅ 找到 ${count} 个匹配的模块`;
+        statusMsg.style.color = '#28a745';
     }
 }
 
-// 重置：显示所有模块，恢复原始内容
+// 重置所有
 function resetAll() {
     const modules = getAllModules();
     modules.forEach((module, index) => {
@@ -275,11 +278,27 @@ function resetAll() {
         module.innerHTML = originalContents[index];
     });
     
-    const noResultMsg = document.getElementById('noResultMsg');
-    if (noResultMsg) {
-        noResultMsg.style.display = 'none';
-    }
+    // 清空状态显示
+    document.getElementById('statusMsg').innerHTML = '💡 提示：输入关键词后自动搜索，按 ESC 键清空并重置';
+    document.getElementById('statusMsg').style.color = '#666';
+    document.getElementById('currentKeywordDisplay').innerHTML = '';
 }
+
+// 监听输入框事件
+const searchInput = document.getElementById('searchInput');
+
+// 输入时实时搜索
+searchInput.addEventListener('input', function(e) {
+    performSearch(e.target.value);
+});
+
+// 按 ESC 键清空并重置
+searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        searchInput.value = '';
+        resetAll();
+    }
+});
 </script>
 
 </body>
