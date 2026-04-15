@@ -69,7 +69,6 @@
         <input type="text" id="searchInput" class="search-input" placeholder="输入模块名称搜索...">
     </div>
     <div class="status-msg" id="statusMsg">
-        💡 提示：输入关键词后自动搜索，按 ESC 键清空并重置
     </div>
     <div id="currentKeywordDisplay" style="text-align: center;"></div>
     <div class="reset-hint" id="resetHint"></div>
@@ -262,11 +261,11 @@ function performSearch(keyword) {
     // 显示结果统计
     const statusMsg = document.getElementById('statusMsg');
     if (!hasResults) {
-        statusMsg.innerHTML = `❌ 没有找到包含 "${keyword}" 的Magisk模块`;
+        statusMsg.innerHTML = `没找到包含 "${keyword}" 的模块`;
         statusMsg.style.color = 'red';
     } else {
         const count = document.querySelectorAll('.download-section[style*="display: block"]').length;
-        statusMsg.innerHTML = `✅ 找到 ${count} 个匹配的模块`;
+        statusMsg.innerHTML = `找到 ${count} 个匹配的模块`;
         statusMsg.style.color = '#28a745';
     }
 }
@@ -280,7 +279,7 @@ function resetAll() {
     });
     
     // 清空状态显示
-    document.getElementById('statusMsg').innerHTML = '💡 提示：输入关键词后自动搜索，按 ESC 键清空并重置';
+    document.getElementById('statusMsg').innerHTML = '';
     document.getElementById('statusMsg').style.color = '#666';
     document.getElementById('currentKeywordDisplay').innerHTML = '';
 }
