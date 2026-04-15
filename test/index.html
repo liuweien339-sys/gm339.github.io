@@ -26,10 +26,10 @@
 </head>
 <body>
 
-<div class="btn-group">
-    <button class="search-btn" onclick="searchByKeyword('PHP')">PHP模块</button>
-    <button class="search-btn" onclick="searchByKeyword('JavaScript')">JS模块</button>
-    <button class="search-btn reset-btn" onclick="resetAll()">显示全部</button>
+<div class="search-box">
+    <input type="text" id="keyword" placeholder="输入要搜索的文字...">
+    <button onclick="searchParagraphs()">搜索</button>
+    <button onclick="clearResults()">清除结果</button>
 </div>
 
 <div id="content">
