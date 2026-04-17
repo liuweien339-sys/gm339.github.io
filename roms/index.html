@@ -65,7 +65,7 @@
 <body>
 <div class="search-bar">
     <div class="search-input-group">
-        <input type="text" id="searchInput" class="search-input" placeholder="输入模块名称搜索...">
+        <input type="text" id="searchInput" class="search-input" placeholder="输入ROM名称搜索...">
     </div>
     <div class="status-msg" id="statusMsg">
     </div>
@@ -247,11 +247,11 @@ function performSearch(keyword) {
 
     const statusMsg = document.getElementById('statusMsg');
     if (!hasResults) {
-        statusMsg.innerHTML = `没找到包含 "${keyword}" 的模块`;
+        statusMsg.innerHTML = `没找到包含 "${keyword}" 的ROM`;
         statusMsg.style.color = 'red';
     } else {
         const count = document.querySelectorAll('.download-section[style*="display: block"]').length;
-        statusMsg.innerHTML = `找到 ${count} 个匹配的模块`;
+        statusMsg.innerHTML = `找到 ${count} 个匹配的ROM`;
         statusMsg.style.color = '#28a745';
     }
 }
