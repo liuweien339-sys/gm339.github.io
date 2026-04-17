@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta charset="UTF-8">
+    <title>搜索</title>
+    <style>
+        .search-bar {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .search-input-group {
+            max-width: 400px;
+            margin: 0;
+        }
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.2s;
+            box-sizing: border-box;
+        }
+        .search-input:focus {
+            border-color: #1976D2;
+        }
+        .status-msg {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        .current-keyword {
+            text-align: center;
+            margin-top: 10px;
+            padding: 8px;
+            background: #e3f2fd;
+            border-radius: 20px;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .reset-hint {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<div class="search-bar">
+    <div class="search-input-group">
+        <input type="text" id="searchInput" class="search-input" placeholder="输入模块名称搜索...">
+    </div>
+    <div class="status-msg" id="statusMsg">
+    </div>
+    <div id="currentKeywordDisplay" style="text-align: center;"></div>
+    <div class="reset-hint" id="resetHint"></div>
+</div>
+<section class="download-section">
+    <p>Shamiko</p>
+    <p>隐藏环境模块</p>
+    <p>最新版本1.2.5</p>
+    <p>最后更新时间 2025年6月18日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/LSPosed/LSPosed.github.io/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>PlayIntegrityFork</p>
+    <p>PlayIntegrity的Fork</p>
+    <p>最新版本V16</p>
+    <p>最后更新时间 2026年1月9日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/osm0sis/PlayIntegrityFork/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>Play Integrity Fix-NEXT</p>
+    <p>PlayIntegrityFix的NEXT版本</p>
+    <p>最新版本V3.0</p>
+    <p>最后更新时间 2025年8月9日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/EricInacio01/PlayIntegrityFix-NEXT/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>Play Integrity Fix-Inject</p>
+    <p>PlayIntegrityFix</p>
+    <p>最新版本V4.5</p>
+    <p>最后更新时间 2026年3月28日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/KOWX712/PlayIntegrityFix/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>TrickyStore</p>
+    <p>允许修改KeyStore</p>  
+    <p>最新版本1.4.1</p>
+    <p>最后更新时间 2025年11月2日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/5ec1cff/TrickyStore/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>TrickyAddonModule</p>
+    <p>更方便的使用TrickyStore的target.txt</p>
+    <p>最新版本v5.0-beta.1</p>
+    <p>最后更新时间 2026年4月3日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/KOWX712/Tricky-Addon-Update-Target-List/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>TS Enhancer Extreme</p>
+    <p>提升TrickyStore使用体验 隐藏解锁BL痕迹</p>
+    <p>最新版本v1.0.0</p>
+    <p>最后更新时间 2026年2月14日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/XtrLumen/TS-Enhancer-Extreme/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>TEESimulator</p>
+    <p>另一个TrickyStore</p>
+    <p>最新版本v3.2</p>
+    <p>最后更新时间 2026年3月7日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/JingMatrix/TEESimulator/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>TEESimulator-RS</p>
+    <p>TEESimulator的Fork</p>
+    <p>最新版本v6.0.0-162</p>
+    <p>最后更新时间 2026年4月1日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/Enginex0/TEESimulator-RS/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>Zygisk Next</p>
+    <p>知名的Zygisk实现</p>
+    <p>最新版本1.3.4</p>
+    <p>最后更新时间 2026年4月8日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/Dr-TSNG/ZygiskNext/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>LSPosed/Vector</p>
+    <p>LSPosed的JingMatrix版本 现名Vector</p>
+    <p>最新版本2.0</p>
+    <p>最后更新时间 2026年3月22日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/JingMatrix/LSPosed/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>LSPosed</p>
+    <p>LSPosed的官方版本</p>
+    <p>最新版本1.9.2</p>
+    <p>最后更新时间 2023年10月11日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/LSPosed/LSPosed/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<section class="download-section">
+    <p>susfs4ksu</p>
+    <p>KernelSU的隐藏模块</p>  
+    <p>最新版本v1.5.2+ Revision 27</p>
+    <p>最后更新时间 2026年3月28日</p>
+    <div style="margin-top: 20px;">
+        <a href="https://github.com/sidex15/susfs4ksu-module/releases" style="display: inline-block; padding: 12px 28px; background: #1976D2; color: white; text-decoration: none; border-radius: 40px;">📥跳转下载页面</a>
+    </div>
+</section>
+<script>
+function getAllModules() {
+    return document.querySelectorAll('.download-section');
+}
+let originalContents = [];
+
+window.onload = function() {
+    const modules = getAllModules();
+    modules.forEach((module, index) => {
+        originalContents[index] = module.innerHTML;
+    });
+};
+function performSearch(keyword) {
+    if (!keyword || keyword.trim() === '') {
+        resetAll();
+        return;
+    }
+    
+    keyword = keyword.trim();
+    const modules = getAllModules();
+    let hasResults = false;
+    
+    const displayDiv = document.getElementById('currentKeywordDisplay');
+    displayDiv.innerHTML = `<div class="current-keyword">🔍 当前搜索: <strong>${keyword}</strong></div>`;
+    
+    modules.forEach(module => {
+        const nameP = module.querySelector('p:first-child');
+        const moduleName = nameP ? nameP.innerText : '';
+        const isMatch = moduleName.toLowerCase().includes(keyword.toLowerCase());
+        
+        if (isMatch) {
+            module.style.display = 'block';
+            hasResults = true;
+            
+            if (nameP) {
+                const originalName = moduleName;
+                const highlightedName = originalName.replace(
+                    new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'), 
+                    '<span class="highlight">$1</span>'
+                );
+                nameP.innerHTML = highlightedName;
+            }
+        } else {
+            module.style.display = 'none';
+        }
+    });
+
+    const statusMsg = document.getElementById('statusMsg');
+    if (!hasResults) {
+        statusMsg.innerHTML = `没找到包含 "${keyword}" 的模块`;
+        statusMsg.style.color = 'red';
+    } else {
+        const count = document.querySelectorAll('.download-section[style*="display: block"]').length;
+        statusMsg.innerHTML = `找到 ${count} 个匹配的模块`;
+        statusMsg.style.color = '#28a745';
+    }
+}
+function resetAll() {
+    const modules = getAllModules();
+    modules.forEach((module, index) => {
+        module.style.display = 'block';
+        module.innerHTML = originalContents[index];
+    });
+    document.getElementById('statusMsg').innerHTML = '';
+    document.getElementById('statusMsg').style.color = '#666';
+    document.getElementById('currentKeywordDisplay').innerHTML = '';
+}
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', function(e) {
+    performSearch(e.target.value);
+});
+searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        searchInput.value = '';
+        resetAll();
+    }
+});
+</script>
+</body>
+</html>
 
