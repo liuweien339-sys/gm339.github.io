@@ -1,48 +1,229 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Weien Kernel Project</title>
-        <style>
-        body {
-            font-family: "Roboto", "Noto Sans", system-ui, -apple-system, sans-serif;
-            line-height: 1.5;
-            margin: 0 auto;
-            padding: 20px;
-            max-width: 800px;
-            background: #f5f5f5;
-            color: #222;
-        }
-        h1, h2, h3 {
-            font-weight: 500;
-        }
-        code, pre {
-            font-family: "Roboto Mono", "Noto Mono", monospace;
-            background: #eee;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>The Weien Kernel Project</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Roboto', 'Noto Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .hero {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1e3c72, #2b3b4e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+    }
+    .tagline {
+      font-size: 1.2rem;
+      color: #475569;
+      margin-top: 0.5rem;
+    }
+    .badge-group {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .badge {
+      background: #eef2ff;
+      padding: 0.25rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1e40af;
+    }
+    .badge-highlight {
+      background: #1e293b;
+      color: #f8fafc;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      border: 1px solid #eef2ff;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.2);
+      border-color: #cbd5e1;
+    }
+    .card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card ul {
+      padding-left: 1.2rem;
+      color: #1e293b;
+    }
+    .card li {
+      margin: 0.6rem 0;
+    }
+    code {
+      background: #f1f5f9;
+      padding: 0.2rem 0.4rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', 'SF Mono', monospace;
+      font-size: 0.85rem;
+    }
+    .download-btn {
+      display: inline-block;
+      background: #0f172a;
+      color: white;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 1rem;
+      transition: background 0.2s;
+    }
+    .download-btn:hover {
+      background: #2d3a5e;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 2rem 0;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #62748c;
+      margin-top: 3rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #0b1120;
+        color: #eef2ff;
+      }
+      .card {
+        background: #111827;
+        border-color: #1f2a44;
+      }
+      .card:hover {
+        border-color: #334155;
+      }
+      .badge {
+        background: #1e293b;
+        color: #cbd5e1;
+      }
+      code {
+        background: #1e293b;
+        color: #facc15;
+      }
+      .hero {
+        border-bottom-color: #1f2a44;
+      }
+      .download-btn {
+        background: #2d3a5e;
+      }
+      .download-btn:hover {
+        background: #4a5c82;
+      }
+    }
+  </style>
 </head>
 <body>
+<div class="container">
+  <div class="hero">
     <h1>The Weien Kernel Project</h1>
-    <p>for Xiaomi Mi 10T Lite / Note 9 Pro (gauguin)</p>
+    <div class="tagline">for Xiaomi Mi 10T Lite / Note 9 Pro (gauguin)</div>
+    <div class="badge-group">
+      <span class="badge">4.19.325-cip132-st16</span>
+      <span class="badge">EFI</span>
+      <span class="badge">ACPI</span>
+      <span class="badge">DroidSpaces</span>
+      <span class="badge">Kprobes</span>
+      <span class="badge">BPF</span>
+      <span class="badge">ReSukiSU</span>
+      <span class="badge">sufus</span>
+      <span class="badge">KPM</span>
+      <span class="badge">OverlayFS</span>
+    </div>
+  </div>
 
-    <h2>Support In Kernel</h2>
-    <ul>
-        <li>EFI</li>
-        <li>ACPI</li>
-        <li>DroidSpaces</li>
-        <li>Kprobes</li>
-        <li>BPF</li>
-        <li>ReSukiSU</li>
-        <li>sufus</li>
-        <li>KPM</li>
-        <li>OverlayFS</li>
-    </ul>
+  <div class="grid">
+    <div class="card">
+      <h3>核心特性</h3>
+      <ul>
+        <li><strong>susfs</strong>增加 Root 隐藏</li>
+        <li>集成 <strong>KPM</strong> 动态内核补丁</li>
+        <li><strong>ReSukiSU</strong>Root 管理器</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>文件系统支持</h3>
+      <ul>
+        <li>exFAT / NTFS (读写)</li>
+        <li>CIFS / SMB 网络共享</li>
+        <li>ISO9660 / UDF 镜像挂载</li>
+      </ul>
+      <h3 style="margin-top:1.2rem">内核基础设施</h3>
+      <ul>
+        <li>Kprobes / BPF </li>
+        <li>DebugFS / KALLSYMS</li>
+      </ul>
+    </div>
 
-    <h2>Download</h2>
-    <p><a href="https://github.com/liuweien339-sys/android_kernel_xiaomi_gauguin/releases">GitHub Releases</a></p>
+  <div class="grid">
+    <div class="card">
+      <h3>刷入要求</h3>
+      <ul>
+        <li>支持 <strong>LineageOS 23.2</strong> 等类原生 ROM</li>
+        <li>Recovery: TWRP / OrangeFox 都行</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>安装步骤</h3>
+      <ol style="padding-left:1.2rem">
+        <li>下载 <code>AnyKernel3.zip</code></li>
+        <li>重启进入 Recovery</li>
+        <li>刷入内核压缩包</li>
+        <li>重启系统即可</li>
+      </ol>
+    </div>
+  </div>
+
+  <hr />
+  <footer>
+    &copy; 2026 The Weien Kernel Project | 基于 GPL v2 开源<br />
+  </footer>
+</div>
 </body>
 </html>
