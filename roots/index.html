@@ -294,8 +294,9 @@
     </section>
 <script>
 function getAllModules() {
-    return document.querySelectorAll('.download-section');
+    return document.querySelectorAll('.card h3'); 
 }
+
 let originalContents = [];
 
 window.onload = function() {
@@ -304,6 +305,7 @@ window.onload = function() {
         originalContents[index] = module.innerHTML;
     });
 };
+
 function performSearch(keyword) {
     if (!keyword || keyword.trim() === '') {
         resetAll();
@@ -315,60 +317,75 @@ function performSearch(keyword) {
     let hasResults = false;
     
     const displayDiv = document.getElementById('currentKeywordDisplay');
-    displayDiv.innerHTML = `<div class="current-keyword">🔍 当前搜索: <strong>${keyword}</strong></div>`;
+    if (displayDiv) {
+        displayDiv.innerHTML = `<div class="current-keyword">🔍 当前搜索: <strong>${keyword}</strong></div>`;
+    }
     
-    modules.forEach(module => {
-        const nameP = module.querySelector('p:first-child');
-        const moduleName = nameP ? nameP.innerText : '';
+    modules.forEach((module, index) => {
+        const moduleName = module.innerText;
         const isMatch = moduleName.toLowerCase().includes(keyword.toLowerCase());
+        const card = module.closest('.card');
         
         if (isMatch) {
-            module.style.display = 'block';
+            if (card) card.style.display = 'block';
+            else module.style.display = 'block';
             hasResults = true;
             
-            if (nameP) {
-                const originalName = moduleName;
-                const highlightedName = originalName.replace(
-                    new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'), 
-                    '<span class="highlight">$1</span>'
-                );
-                nameP.innerHTML = highlightedName;
-            }
+            const highlightedName = moduleName.replace(
+                new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'), 
+                '<span class="highlight">$1</span>'
+            );
+            module.innerHTML = highlightedName;
         } else {
-            module.style.display = 'none';
+            if (card) card.style.display = 'none';
+            else module.style.display = 'none';
         }
     });
 
     const statusMsg = document.getElementById('statusMsg');
-    if (!hasResults) {
-        statusMsg.innerHTML = `没找到包含 "${keyword}" 的结果`;
-        statusMsg.style.color = 'red';
-    } else {
-        const count = document.querySelectorAll('.download-section[style*="display: block"]').length;
-        statusMsg.innerHTML = `找到 ${count} 个匹配的结果`;
-        statusMsg.style.color = '#28a745';
+    if (statusMsg) {
+        if (!hasResults) {
+            statusMsg.innerHTML = `没找到包含 "${keyword}" 的结果`;
+            statusMsg.style.color = 'red';
+        } else {
+            const visibleCards = document.querySelectorAll('.card[style*="display: block"]').length;
+            statusMsg.innerHTML = `找到 ${visibleCards} 个匹配的结果`;
+            statusMsg.style.color = '#28a745';
+        }
     }
 }
+
 function resetAll() {
     const modules = getAllModules();
     modules.forEach((module, index) => {
-        module.style.display = 'block';
-        module.innerHTML = originalContents[index];
+        const card = module.closest('.card');
+        if (card) {
+            card.style.display = 'block';
+            card.innerHTML = originalContents[index] ? 
+                card.innerHTML.replace(card.querySelector('h3').innerHTML, originalContents[index]) :
+                card.innerHTML;
+        } else {
+            module.style.display = 'block';
+            module.innerHTML = originalContents[index];
+        }
     });
     document.getElementById('statusMsg').innerHTML = '';
     document.getElementById('statusMsg').style.color = '#666';
     document.getElementById('currentKeywordDisplay').innerHTML = '';
 }
+
 const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('input', function(e) {
-    performSearch(e.target.value);
-});
-searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        searchInput.value = '';
-        resetAll();
+if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+        performSearch(e.target.value);
+    });
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            searchInput.value = '';
+            resetAll();
+        }
+    });
     }
-});
 </script>
 </body>
 </html>
