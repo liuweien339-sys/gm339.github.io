@@ -356,7 +356,7 @@
 </section>
 <script>
 function getAllModules() {
-    return document.querySelectorAll('.h3');
+    return document.querySelectorAll('h3');
 }
 let originalContents = [];
 
@@ -406,7 +406,7 @@ function performSearch(keyword) {
         statusMsg.innerHTML = `没找到包含 "${keyword}" 的结果`;
         statusMsg.style.color = 'red';
     } else {
-        const count = document.querySelectorAll('.download-section[style*="display: block"]').length;
+        const count = document.querySelectorAll('h3[style*="display: block"]').length;
         statusMsg.innerHTML = `找到 ${count} 个匹配的结果`;
         statusMsg.style.color = '#28a745';
     }
